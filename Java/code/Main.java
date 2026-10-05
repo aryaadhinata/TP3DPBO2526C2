@@ -2,10 +2,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-/** Menjalankan menu CLI untuk pengelolaan satu atau beberapa bengkel. */
+/**
+ * Entry point CLI untuk membuat data awal dan menjalankan menu bengkel.
+ *
+ * <p>Data contoh dimuat tanpa dicetak. Pengguna memilih kapan menampilkan
+ * ringkasan, memproses kendaraan, melihat laporan, atau berpindah bengkel.</p>
+ */
 public class Main {
     private static final Scanner INPUT = new Scanner(System.in);
 
+    /** Mencegah instansiasi kelas CLI yang hanya menyediakan operasi statis. */
+    private Main() {
+    }
+
+    /**
+     * Membaca teks wajib dari input standar.
+     *
+     * @param prompt label yang ditampilkan sebelum input
+     * @return teks yang sudah dibersihkan, atau {@code null} saat input berakhir
+     */
     private static String bacaTeks(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -20,6 +35,14 @@ public class Main {
         }
     }
 
+    /**
+     * Membaca bilangan bulat pada rentang inklusif dan mengulang input invalid.
+     *
+     * @param prompt label input
+     * @param minimum nilai terendah yang diterima
+     * @param maksimum nilai tertinggi yang diterima
+     * @return nilai valid atau {@code null} saat input berakhir
+     */
     private static Integer bacaAngka(String prompt, int minimum, int maksimum) {
         while (true) {
             System.out.print(prompt);
@@ -39,6 +62,7 @@ public class Main {
         }
     }
 
+    /** @return kategori kendaraan pilihan pengguna, atau {@code null} saat EOF */
     private static JenisKendaraan bacaJenisKendaraan() {
         System.out.println("Jenis kendaraan:\n1. Mobil\n2. Motor");
         Integer pilihan = bacaAngka("Pilih jenis: ", 1, 2);
@@ -48,6 +72,7 @@ public class Main {
         return pilihan == 1 ? JenisKendaraan.MOBIL : JenisKendaraan.MOTOR;
     }
 
+    /** @return fokus bagian pilihan pengguna, atau {@code null} saat EOF */
     private static FokusBagian bacaFokus() {
         FokusBagian[] pilihanFokus = FokusBagian.values();
         System.out.println("Bagian bermasalah:");
@@ -58,6 +83,12 @@ public class Main {
         return pilihan == null ? null : pilihanFokus[pilihan - 1];
     }
 
+    /**
+     * Membuat Montir atau Mekanik dari input lalu mendaftarkannya ke bengkel.
+     *
+     * @param bengkel bengkel aktif yang menerima pegawai
+     * @return false jika input berakhir sebelum proses selesai
+     */
     private static boolean tambahPegawai(Bengkel bengkel) {
         System.out.println("\nJenis pegawai:\n1. Montir\n2. Mekanik");
         Integer jenisPegawai = bacaAngka("Pilih jenis pegawai: ", 1, 2);
@@ -103,6 +134,12 @@ public class Main {
         return true;
     }
 
+    /**
+     * Membuat kendaraan beserta masalahnya dan mengirimkannya ke bengkel aktif.
+     *
+     * @param bengkel bengkel aktif yang kapasitasnya akan diperiksa
+     * @return false jika input berakhir sebelum proses selesai
+     */
     private static boolean tambahKendaraan(Bengkel bengkel) {
         if (bengkel.kapasitasPenuh()) {
             System.out.println("Kendaraan tidak dapat ditambahkan: bengkel sudah penuh.");
@@ -139,6 +176,12 @@ public class Main {
         return true;
     }
 
+    /**
+     * Menampilkan kendaraan bengkel aktif dan memproses pilihan pengguna.
+     *
+     * @param bengkel bengkel yang kendaraannya akan diproses
+     * @return false jika input berakhir saat pemilihan
+     */
     private static boolean prosesKendaraan(Bengkel bengkel) {
         List<Kendaraan> kendaraanList = bengkel.getDaftarKendaraan();
         if (kendaraanList.isEmpty()) {
@@ -158,6 +201,13 @@ public class Main {
         return true;
     }
 
+    /**
+     * Membuat bengkel baru dan menjadikannya bengkel aktif.
+     *
+     * @param bengkelList seluruh bengkel dalam sesi CLI
+     * @param bengkelAktif referensi satu-elemen untuk memperbarui indeks aktif
+     * @return false jika input berakhir sebelum bengkel selesai dibuat
+     */
     private static boolean tambahBengkel(List<Bengkel> bengkelList,
                                          int[] bengkelAktif) {
         String nama = bacaTeks("Nama bengkel: ");
@@ -173,6 +223,13 @@ public class Main {
         return true;
     }
 
+    /**
+     * Memilih bengkel aktif dari daftar bengkel dalam sesi.
+     *
+     * @param bengkelList seluruh bengkel yang dapat dipilih
+     * @param bengkelAktif referensi satu-elemen untuk memperbarui indeks aktif
+     * @return false jika input berakhir saat pemilihan
+     */
     private static boolean gantiBengkel(List<Bengkel> bengkelList,
                                         int[] bengkelAktif) {
         System.out.println("\nDaftar bengkel:");
@@ -191,6 +248,7 @@ public class Main {
         return true;
     }
 
+    /** Mencetak laporan historis setiap Montir pada bengkel aktif. */
     private static void tampilkanLaporanMontir(Bengkel bengkel) {
         boolean adaMontir = false;
         for (PegawaiBengkel pegawai : bengkel.getDaftarPegawai()) {
@@ -205,6 +263,11 @@ public class Main {
         }
     }
 
+    /**
+     * Memuat data demonstrasi tanpa menampilkan atau memprosesnya otomatis.
+     *
+     * @param bengkel bengkel awal yang menerima pegawai dan kendaraan contoh
+     */
     private static void isiDataAwal(Bengkel bengkel) {
         bengkel.tambahPegawai(new Montir(
                 "P-001", "Budi Santoso", 48, JenisKendaraan.MOBIL,
@@ -225,6 +288,11 @@ public class Main {
         bengkel.terimaKendaraan(avanza);
     }
 
+    /**
+     * Menjalankan sesi interaktif sampai pengguna memilih keluar.
+     *
+     * @param args argumen baris perintah; tidak digunakan oleh CLI
+     */
     public static void main(String[] args) {
         List<Bengkel> bengkelList = new ArrayList<>();
         bengkelList.add(new Bengkel("Bengkel Maju Jaya", 5));

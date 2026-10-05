@@ -9,7 +9,12 @@
 
 using namespace std;
 
-// Menyediakan CLI untuk mengelola bengkel, pegawai, kendaraan, dan layanan.
+/**
+ * @brief Menyediakan CLI interaktif untuk satu atau beberapa bengkel.
+ *
+ * Data demonstrasi dimuat pada bengkel awal, tetapi hanya ditampilkan setelah
+ * pengguna memilih ringkasan. Menu juga menyediakan pendaftaran dan layanan.
+ */
 static const vector<FokusBagian>& daftarFokus() {
     static const vector<FokusBagian> fokus = {
         FokusBagian::MESIN, FokusBagian::TRANSMISI, FokusBagian::REM,
@@ -21,6 +26,12 @@ static const vector<FokusBagian>& daftarFokus() {
     return fokus;
 }
 
+/**
+ * @brief Membaca teks wajib dan mengulang hingga input tidak kosong.
+ * @param prompt Label yang ditampilkan sebelum input.
+ * @param hasil Tujuan penyimpanan teks yang dibaca.
+ * @return false jika input standar berakhir sebelum teks valid diperoleh.
+ */
 static bool bacaTeks(const string& prompt, string& hasil) {
     while (true) {
         cout << prompt;
@@ -30,6 +41,14 @@ static bool bacaTeks(const string& prompt, string& hasil) {
     }
 }
 
+/**
+ * @brief Membaca bilangan bulat dalam rentang inklusif.
+ * @param prompt Label input.
+ * @param minimum Nilai terkecil yang diterima.
+ * @param maksimum Nilai terbesar yang diterima.
+ * @param hasil Tujuan penyimpanan angka yang valid.
+ * @return false jika input standar berakhir sebelum angka valid diperoleh.
+ */
 static bool bacaAngka(const string& prompt, int minimum, int maksimum, int& hasil) {
     string input;
     while (true) {
@@ -46,6 +65,7 @@ static bool bacaAngka(const string& prompt, int minimum, int maksimum, int& hasi
     }
 }
 
+/// Meminta kategori kendaraan dan mengubah pilihan menu menjadi enum domain.
 static bool bacaJenisKendaraan(JenisKendaraan& jenis) {
     int pilihan;
     cout << "Jenis kendaraan:\n1. Mobil\n2. Motor\n";
@@ -54,6 +74,7 @@ static bool bacaJenisKendaraan(JenisKendaraan& jenis) {
     return true;
 }
 
+/// Menampilkan katalog FokusBagian dan membaca nilai yang dipilih pengguna.
 static bool bacaFokus(FokusBagian& fokus) {
     const auto& pilihanFokus = daftarFokus();
     cout << "Bagian bermasalah:\n";
@@ -68,6 +89,7 @@ static bool bacaFokus(FokusBagian& fokus) {
     return true;
 }
 
+/// Mengumpulkan data Montir atau Mekanik lalu mendaftarkannya ke bengkel.
 static bool tambahPegawai(Bengkel& bengkel) {
     int jenisPegawai;
     cout << "\nJenis pegawai:\n1. Montir\n2. Mekanik\n";
@@ -91,7 +113,7 @@ static bool tambahPegawai(Bengkel& bengkel) {
     } else {
         int jumlahFokus;
         if (!bacaAngka("Jumlah fokus mekanik (0 untuk semua bagian): ",
-                       0, static_cast<int>(daftarFokus().size()), jumlahFokus)) {
+                        0, static_cast<int>(daftarFokus().size()), jumlahFokus)) {
             return false;
         }
 
@@ -109,6 +131,7 @@ static bool tambahPegawai(Bengkel& bengkel) {
     return true;
 }
 
+/// Mengumpulkan identitas kendaraan dan masalahnya sebelum meminta penerimaan.
 static bool tambahKendaraan(Bengkel& bengkel) {
     if (bengkel.kapasitasPenuh()) {
         cout << "Kendaraan tidak dapat ditambahkan: bengkel sudah penuh.\n";
@@ -146,6 +169,7 @@ static bool tambahKendaraan(Bengkel& bengkel) {
     return true;
 }
 
+/// Memilih dan memproses kendaraan melalui dispatch polimorfik bengkel.
 static bool prosesKendaraan(Bengkel& bengkel) {
     const auto& kendaraan = bengkel.getDaftarKendaraan();
     if (kendaraan.empty()) {
@@ -165,6 +189,7 @@ static bool prosesKendaraan(Bengkel& bengkel) {
     return true;
 }
 
+/// Membuat bengkel baru dan langsung menjadikannya bengkel aktif.
 static bool tambahBengkel(vector<unique_ptr<Bengkel>>& bengkelList,
                         size_t& bengkelAktif) {
     string nama;
@@ -181,6 +206,7 @@ static bool tambahBengkel(vector<unique_ptr<Bengkel>>& bengkelList,
     return true;
 }
 
+/// Memperbarui indeks aktif berdasarkan pilihan dari seluruh bengkel.
 static bool gantiBengkel(const vector<unique_ptr<Bengkel>>& bengkelList,
                         size_t& bengkelAktif) {
     cout << "\nDaftar bengkel:\n";
@@ -197,6 +223,7 @@ static bool gantiBengkel(const vector<unique_ptr<Bengkel>>& bengkelList,
     return true;
 }
 
+/// Menampilkan laporan historis setiap Montir pada bengkel aktif.
 static void tampilkanLaporanMontir(const Bengkel& bengkel) {
     bool adaMontir = false;
     for (const auto& pegawai : bengkel.getDaftarPegawai()) {
@@ -208,6 +235,7 @@ static void tampilkanLaporanMontir(const Bengkel& bengkel) {
     if (!adaMontir) cout << "Belum ada montir di bengkel ini.\n";
 }
 
+/// Memuat data contoh tanpa mencetak ringkasan atau menjalankan layanan.
 static void isiDataAwal(Bengkel& bengkel) {
     bengkel.tambahPegawai(make_unique<Montir>(
         "P-001", "Budi Santoso", 48, JenisKendaraan::MOBIL,
@@ -227,6 +255,7 @@ static void isiDataAwal(Bengkel& bengkel) {
     bengkel.terimaKendaraan(std::move(avanza));
 }
 
+/// Menjalankan siklus menu sampai pengguna memilih keluar atau input berakhir.
 int main() {
     vector<unique_ptr<Bengkel>> bengkelList;
     bengkelList.push_back(make_unique<Bengkel>("Bengkel Maju Jaya", 5));

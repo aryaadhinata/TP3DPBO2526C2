@@ -1,18 +1,21 @@
 #pragma once
 #include <string>
 
-// Nilai enumerasi bersama untuk jenis kendaraan dan fokus pemeriksaan.
+/** Kategori kendaraan yang digunakan oleh kendaraan dan spesialisasi pegawai. */
 enum class JenisKendaraan { MOBIL, MOTOR };
 
+/** Bagian kendaraan yang dapat menjadi fokus pemeriksaan atau lokasi masalah. */
 enum class FokusBagian {
     MESIN, TRANSMISI, REM, SUSPENSI_KEMUDI, KELISTRIKAN, SISTEM_PENDINGIN,
     SISTEM_PEMBUANGAN, RANGKA_CHASIS, BODY_EKSTERIOR, INTERIOR_AC, RODA_BAN
 };
 
+/// Mengubah jenis kendaraan menjadi label yang dapat ditampilkan pada CLI.
 inline std::string toString(JenisKendaraan j) {
     return (j == JenisKendaraan::MOBIL) ? "MOBIL" : "MOTOR";
 }
 
+/// Mengubah fokus bagian menjadi nama stabil yang disimpan pada masalah.
 inline std::string toString(FokusBagian f) {
     switch (f) {
         case FokusBagian::MESIN:             return "MESIN";

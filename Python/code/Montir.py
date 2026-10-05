@@ -1,3 +1,5 @@
+"""Implementasi pegawai Montir untuk perbaikan dan laporan perawatan."""
+
 from .enums import JenisKendaraan, to_string
 from .Kendaraan import Kendaraan
 from .MasalahKendaraan import MasalahKendaraan
@@ -5,7 +7,11 @@ from .PegawaiBengkel import PegawaiBengkel
 
 
 class Montir(PegawaiBengkel):
-    """Pegawai teknisi yang memperbaiki kendaraan dan mencatat laporannya."""
+    """Pegawai teknisi yang memperbaiki masalah dan menyimpan laporan.
+
+    Montir menolak kendaraan di luar spesialisasi dan menyimpan salinan masalah
+    yang selesai sebagai catatan historis perawatan.
+    """
 
     def __init__(
         self,
@@ -15,11 +21,16 @@ class Montir(PegawaiBengkel):
         spesialisasi: JenisKendaraan,
         keahlian: str,
     ) -> None:
+        """Buat Montir dengan keahlian teknis dan spesialisasi kendaraan."""
         super().__init__(id_pegawai, nama, performa, spesialisasi)
         self.Keahlian = keahlian
         self.LaporanPerawatan: list[MasalahKendaraan] = []
 
     def perbaikan(self, kendaraan: Kendaraan) -> None:
+        """Perbaiki masalah yang belum selesai pada kendaraan yang cocok.
+
+        Masalah yang telah diperbaiki dilewati agar tidak dilaporkan dua kali.
+        """
         if kendaraan.getJenis() != self.getSpesialisasi():
             print(
                 f"  [Montir {self.getNama()}] Menolak: kendaraan "
@@ -48,6 +59,7 @@ class Montir(PegawaiBengkel):
             )
 
     def buatLaporan(self) -> str:
+        """Susun laporan teks dari seluruh perbaikan yang pernah dicatat."""
         lines = [
             f"LAPORAN PERAWATAN - Montir {self.getNama()} "
             f"(Keahlian: {self.Keahlian})"
@@ -63,13 +75,16 @@ class Montir(PegawaiBengkel):
         return "\n".join(lines) + "\n"
 
     def hitungPerfoma(self) -> int:
+        """Tambahkan dua poin performa untuk setiap perbaikan tercatat."""
         return super().hitungPerfoma() + len(self.LaporanPerawatan) * 2
 
     def getDetailPegawai(self) -> str:
+        """Format detail pegawai beserta keahlian dan jumlah laporan."""
         return (
             f"MONTIR  {super().getDetailPegawai()} | "
             f"Keahlian: {self.Keahlian} | Laporan: {len(self.LaporanPerawatan)}"
         )
 
     def tanganiKendaraan(self, kendaraan: Kendaraan) -> None:
+        """Implementasikan dispatch pegawai ke operasi perbaikan."""
         self.perbaikan(kendaraan)

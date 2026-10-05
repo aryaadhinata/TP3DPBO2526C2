@@ -1,14 +1,18 @@
-"""Enumerasi domain untuk klasifikasi kendaraan dan bagian kendaraan."""
+"""Nilai enumerasi bersama yang dipakai model domain bengkel."""
 
 from enum import Enum
 
 
 class JenisKendaraan(Enum):
+    """Kategori kendaraan untuk data kendaraan dan spesialisasi pegawai."""
+
     MOBIL = "MOBIL"
     MOTOR = "MOTOR"
 
 
 class FokusBagian(Enum):
+    """Bagian kendaraan yang dapat diperiksa atau dilaporkan bermasalah."""
+
     MESIN = "MESIN"
     TRANSMISI = "TRANSMISI"
     REM = "REM"
@@ -23,4 +27,5 @@ class FokusBagian(Enum):
 
 
 def to_string(nilai: Enum) -> str:
+    """Kembalikan nilai teks enum untuk pencocokan dan tampilan CLI."""
     return str(nilai.value)

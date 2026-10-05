@@ -1,17 +1,38 @@
 import java.util.ArrayList;
 import java.util.List;
 
-/** Pegawai teknisi yang memperbaiki kendaraan dan menyusun laporan perawatan. */
+/**
+ * Pegawai teknisi turunan {@link PegawaiBengkel} yang memperbaiki masalah
+ * kendaraan dan menyimpan salinan setiap perbaikan pada laporan historis.
+ * Kendaraan yang tidak sesuai spesialisasi tidak akan diproses.
+ */
 public class Montir extends PegawaiBengkel {
     private final String Keahlian;
     private final List<MasalahKendaraan> LaporanPerawatan = new ArrayList<>();
 
+    /**
+     * Membuat Montir dengan keahlian teknis dan spesialisasi kendaraan.
+     *
+     * @param id identitas pegawai
+     * @param nama nama Montir
+     * @param performa performa dasar dalam bulan
+     * @param spesialisasi kategori kendaraan yang dapat diperbaiki
+     * @param keahlian ringkasan keahlian teknis
+     */
     public Montir(String id, String nama, int performa,
                   JenisKendaraan spesialisasi, String keahlian) {
         super(id, nama, performa, spesialisasi);
         this.Keahlian = keahlian;
     }
 
+    /**
+     * Memperbaiki seluruh masalah yang belum selesai pada kendaraan.
+     *
+     * @param kendaraan kendaraan yang akan diperbaiki
+     *
+     * Masalah selesai dilewati pada pemanggilan berikutnya untuk mencegah
+     * pencatatan perbaikan yang sama lebih dari satu kali.
+     */
     public void perbaikan(Kendaraan kendaraan) {
         if (kendaraan.getJenis() != getSpesialisasi()) {
             System.out.println("  [Montir " + getNama() + "] Menolak: kendaraan "
@@ -33,6 +54,11 @@ public class Montir extends PegawaiBengkel {
         }
     }
 
+    /**
+     * Membentuk laporan yang berisi seluruh perbaikan historis Montir.
+     *
+     * @return laporan perawatan berformat teks
+     */
     public String buatLaporan() {
         StringBuilder laporan = new StringBuilder()
                 .append("LAPORAN PERAWATAN - Montir ")
@@ -54,17 +80,20 @@ public class Montir extends PegawaiBengkel {
         return laporan.toString();
     }
 
+    /** @return performa dasar ditambah dua poin untuk setiap perbaikan */
     @Override
     public int hitungPerfoma() {
         return super.hitungPerfoma() + LaporanPerawatan.size() * 2;
     }
 
+    /** @return detail pegawai termasuk keahlian dan jumlah laporan */
     @Override
     public String getDetailPegawai() {
         return "MONTIR  " + super.getDetailPegawai() + " | Keahlian: "
                 + Keahlian + " | Laporan: " + LaporanPerawatan.size();
     }
 
+    /** Meneruskan pemanggilan polimorfik ke {@link #perbaikan(Kendaraan)}. */
     @Override
     public void tanganiKendaraan(Kendaraan kendaraan) {
         perbaikan(kendaraan);

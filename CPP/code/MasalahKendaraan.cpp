@@ -3,7 +3,12 @@
 #include <string>
 #include <utility>
 
-// Menyimpan kondisi perbaikan, lokasi masalah, dan estimasi waktu layanan.
+/**
+ * @brief Menyimpan deskripsi masalah, bagian terkait, dan status perbaikannya.
+ *
+ * Bagian bermasalah menggunakan nama FokusBagian agar dapat dicocokkan dengan
+ * fokus Mekanik. Tanda "-" pada waktu berarti masalah belum diperbaiki.
+ */
 class MasalahKendaraan {
 private:
     std::string NamaMasalah;
@@ -18,18 +23,34 @@ private:
     }
 
 public:
+    /**
+     * @brief Membuat masalah baru dengan status belum diperbaiki.
+     * @param nama Deskripsi masalah yang dilaporkan.
+     * @param bagian Nama bagian kendaraan yang bermasalah.
+     */
     MasalahKendaraan(std::string nama, std::string bagian)
         : NamaMasalah(std::move(nama)), BagianBermasalah(std::move(bagian)),
             TerakhirDiperbaiki("-") {}
 
+    /// @return Deskripsi masalah.
     const std::string& getNamaMasalah() const { return NamaMasalah; }
+
+    /// @return Nama bagian yang terkait dengan masalah.
     const std::string& getBagianBermasalah() const { return BagianBermasalah; }
+
+    /// @return Waktu perbaikan terakhir atau "-" jika belum diperbaiki.
     const std::string& getTerakhirDiperbaiki() const { return TerakhirDiperbaiki; }
+
+    /// @return true jika waktu perbaikan telah dicatat.
     bool sudahDiperbaiki() const { return TerakhirDiperbaiki != "-"; }
 
+    /// Mencatat waktu lokal saat masalah ditandai selesai diperbaiki.
     void updateStatusPerbaikan() { TerakhirDiperbaiki = waktuSekarang(); }
 
-    // Estimasi waktu perbaikan (jam) berdasarkan bagian yang bermasalah
+    /**
+     * @brief Mengembalikan estimasi durasi perbaikan berdasarkan bagian.
+     * @return Durasi estimasi dalam jam; bagian yang tidak dikenal memakai 3 jam.
+     */
     int getEstimasiWaktu() const {
         if (BagianBermasalah == "MESIN")             return 8;
         if (BagianBermasalah == "TRANSMISI")         return 6;

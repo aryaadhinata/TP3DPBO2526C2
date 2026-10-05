@@ -1,4 +1,8 @@
-"""Ekspor class dan enumerasi domain bengkel sebagai API package."""
+"""API publik package untuk model domain dan enumerasi bengkel.
+
+Ekspor ini memungkinkan tipe diimpor langsung dari ``Python.code`` tanpa
+bergantung pada lokasi modul implementasi masing-masing.
+"""
 
 from .Bengkel import Bengkel
 from .Kendaraan import Kendaraan

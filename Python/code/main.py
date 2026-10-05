@@ -1,4 +1,9 @@
-"""Antarmuka CLI untuk mengelola bengkel dan menjalankan layanan kendaraan."""
+"""Antarmuka CLI untuk mengelola bengkel dan menjalankan layanan kendaraan.
+
+Data contoh dimuat tetapi hanya ditampilkan atas permintaan pengguna. Pembaca
+input mengembalikan ``None`` saat EOF agar proses dapat berhenti tanpa
+mendaftarkan objek yang belum lengkap.
+"""
 
 if __package__:
     from .Bengkel import Bengkel
@@ -21,6 +26,7 @@ else:
 
 
 def baca_teks(prompt: str) -> str | None:
+    """Baca teks wajib dan kembalikan ``None`` jika input standar berakhir."""
     while True:
         try:
             hasil = input(prompt)
@@ -32,6 +38,7 @@ def baca_teks(prompt: str) -> str | None:
 
 
 def baca_angka(prompt: str, minimum: int, maksimum: int) -> int | None:
+    """Baca integer dalam rentang inklusif; ulangi jika input tidak valid."""
     while True:
         try:
             input_pengguna = input(prompt)
@@ -47,6 +54,7 @@ def baca_angka(prompt: str, minimum: int, maksimum: int) -> int | None:
 
 
 def baca_jenis_kendaraan() -> JenisKendaraan | None:
+    """Tampilkan kategori kendaraan dan kembalikan enum pilihan pengguna."""
     print("Jenis kendaraan:\n1. Mobil\n2. Motor")
     pilihan = baca_angka("Pilih jenis: ", 1, 2)
     if pilihan is None:
@@ -55,6 +63,7 @@ def baca_jenis_kendaraan() -> JenisKendaraan | None:
 
 
 def baca_fokus() -> FokusBagian | None:
+    """Tampilkan katalog bagian dan kembalikan fokus enum yang dipilih."""
     pilihan_fokus = list(FokusBagian)
     print("Bagian bermasalah:")
     for index, fokus in enumerate(pilihan_fokus, start=1):
@@ -66,6 +75,11 @@ def baca_fokus() -> FokusBagian | None:
 
 
 def tambah_pegawai(bengkel: Bengkel) -> bool:
+    """Buat Montir atau Mekanik dari input, lalu daftarkan ke bengkel aktif.
+
+    Returns:
+        ``False`` bila input berakhir sebelum proses pendaftaran selesai.
+    """
     print("\nJenis pegawai:\n1. Montir\n2. Mekanik")
     jenis_pegawai = baca_angka("Pilih jenis pegawai: ", 1, 2)
     if jenis_pegawai is None:
@@ -103,6 +117,14 @@ def tambah_pegawai(bengkel: Bengkel) -> bool:
 
 
 def tambah_kendaraan(bengkel: Bengkel) -> bool:
+    """Buat kendaraan dan masalahnya, lalu minta bengkel menerima kendaraan.
+
+    Kapasitas diperiksa sebelum pengumpulan input dan kembali divalidasi saat
+    kendaraan diserahkan kepada objek bengkel.
+
+    Returns:
+        ``False`` bila input berakhir sebelum data kendaraan lengkap.
+    """
     if bengkel.kapasitasPenuh():
         print("Kendaraan tidak dapat ditambahkan: bengkel sudah penuh.")
         return True
@@ -140,6 +162,7 @@ def tambah_kendaraan(bengkel: Bengkel) -> bool:
 
 
 def proses_kendaraan(bengkel: Bengkel) -> bool:
+    """Tampilkan kendaraan pada bengkel dan proses pilihan pengguna."""
     kendaraan_list = bengkel.getDaftarKendaraan()
     if not kendaraan_list:
         print("Belum ada kendaraan untuk diproses.")
@@ -159,6 +182,7 @@ def proses_kendaraan(bengkel: Bengkel) -> bool:
 def tambah_bengkel(
     bengkel_list: list[Bengkel], bengkel_aktif: int
 ) -> int | None:
+    """Tambahkan bengkel dan kembalikan indeksnya sebagai bengkel aktif."""
     nama = baca_teks("Nama bengkel: ")
     kapasitas = baca_angka("Kapasitas kendaraan: ", 1, 1_000_000)
     if nama is None or kapasitas is None:
@@ -174,6 +198,7 @@ def tambah_bengkel(
 
 
 def ganti_bengkel(bengkel_list: list[Bengkel], bengkel_aktif: int) -> int | None:
+    """Pilih bengkel aktif dari seluruh bengkel dalam sesi CLI."""
     print("\nDaftar bengkel:")
     for index, bengkel in enumerate(bengkel_list, start=1):
         aktif = " (aktif)" if index - 1 == bengkel_aktif else ""
@@ -188,6 +213,7 @@ def ganti_bengkel(bengkel_list: list[Bengkel], bengkel_aktif: int) -> int | None
 
 
 def tampilkan_laporan_montir(bengkel: Bengkel) -> None:
+    """Cetak laporan Montir di bengkel atau pesan jika belum ada Montir."""
     montir_list = [
         pegawai
         for pegawai in bengkel.getDaftarPegawai()
@@ -201,6 +227,7 @@ def tampilkan_laporan_montir(bengkel: Bengkel) -> None:
 
 
 def isi_data_awal(bengkel: Bengkel) -> None:
+    """Muat pegawai dan kendaraan contoh tanpa menampilkannya otomatis."""
     bengkel.tambahPegawai(
         Montir(
             "P-001",
@@ -238,6 +265,7 @@ def isi_data_awal(bengkel: Bengkel) -> None:
 
 
 def main() -> None:
+    """Jalankan menu interaktif hingga pengguna keluar atau input berakhir."""
     bengkel_list = [Bengkel("Bengkel Maju Jaya", 5)]
     isi_data_awal(bengkel_list[0])
     bengkel_aktif = 0

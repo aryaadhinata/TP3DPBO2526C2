@@ -8,18 +8,38 @@
 #include "MasalahKendaraan.cpp"
 #include "PegawaiBengkel.cpp"
 
-// Pegawai teknisi yang memperbaiki kendaraan dan menyusun laporan perawatan.
+/**
+ * @brief Pegawai teknisi yang memperbaiki masalah dan mencatat hasil kerja.
+ *
+ * Montir hanya memperbaiki kendaraan yang cocok dengan spesialisasinya.
+ * Setiap masalah selesai disalin ke laporan perawatan sebagai catatan historis.
+ */
 class Montir : public PegawaiBengkel {
 private:
     std::string Keahlian;
     std::vector<MasalahKendaraan> LaporanPerawatan;
 
 public:
+    /**
+     * @brief Membuat Montir dengan keahlian dan spesialisasi kendaraan.
+     * @param id Identitas pegawai.
+     * @param nama Nama Montir.
+     * @param performa Performa dasar dalam bulan.
+     * @param spesialisasi Kategori kendaraan yang dapat diperbaiki.
+     * @param keahlian Deskripsi keahlian teknis Montir.
+     */
     Montir(std::string id, std::string nama, int performa,
             JenisKendaraan spesialisasi, std::string keahlian)
         : PegawaiBengkel(std::move(id), std::move(nama), performa, spesialisasi),
             Keahlian(std::move(keahlian)) {}
 
+    /**
+     * @brief Memperbaiki seluruh masalah yang belum selesai pada kendaraan.
+     * @param kendaraan Kendaraan yang akan diperbaiki.
+     *
+     * Kendaraan di luar spesialisasi ditolak. Masalah yang sudah diperbaiki
+     * dilewati agar tidak tercatat ulang sebagai perbaikan baru.
+     */
     void perbaikan(Kendaraan& kendaraan) {
         if (kendaraan.getJenis() != getSpesialisasi()) {
             std::cout << "  [Montir " << getNama() << "] Menolak: kendaraan "
@@ -38,6 +58,7 @@ public:
         }
     }
 
+    /// @return Laporan historis perbaikan Montir dalam format teks.
     std::string buatLaporan() const {
         std::ostringstream os;
         os << "LAPORAN PERAWATAN - Montir " << getNama() << " (Keahlian: "
@@ -52,12 +73,13 @@ public:
         return os.str();
     }
 
-    // Performa dasar + 2 poin per perbaikan yang dilaporkan
+    /// @return Performa dasar ditambah dua poin untuk setiap perbaikan.
     int hitungPerfoma() const override {
         return PegawaiBengkel::hitungPerfoma() +
                static_cast<int>(LaporanPerawatan.size()) * 2;
     }
 
+    /// @return Detail pegawai beserta keahlian dan jumlah laporan perawatan.
     std::string getDetailPegawai() const override {
         std::ostringstream os;
         os << "MONTIR  " << PegawaiBengkel::getDetailPegawai()
@@ -66,5 +88,6 @@ public:
         return os.str();
     }
 
+    /// Meneruskan dispatch polimorfik ke operasi perbaikan Montir.
     void tanganiKendaraan(Kendaraan& kendaraan) override { perbaikan(kendaraan); }
 };

@@ -1,4 +1,4 @@
-"""Jalankan antarmuka CLI saat package dipanggil dengan ``python -m``."""
+"""Entry point package yang meneruskan eksekusi ke CLI saat ``python -m`` dipakai."""
 
 from .main import main
 

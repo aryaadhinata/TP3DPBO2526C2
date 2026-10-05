@@ -1,0 +1,13 @@
+public enum FokusBagian {
+    MESIN,
+    TRANSMISI,
+    REM,
+    SUSPENSI_KEMUDI,
+    KELISTRIKAN,
+    SISTEM_PENDINGIN,
+    SISTEM_PEMBUANGAN,
+    RANGKA_CHASIS,
+    BODY_EKSTERIOR,
+    INTERIOR_AC,
+    RODA_BAN
+}

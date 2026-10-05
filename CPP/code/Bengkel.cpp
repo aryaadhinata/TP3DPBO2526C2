@@ -18,6 +18,10 @@ public:
     Bengkel(std::string nama, int kapasitas)
         : NamaBengkel(std::move(nama)), Kapasitas(kapasitas) {}
 
+    const std::string& getNamaBengkel() const {
+        return NamaBengkel;
+    }
+
     void tambahPegawai(std::unique_ptr<PegawaiBengkel> pegawai) {
         if (pegawai) DaftarPegawai.push_back(std::move(pegawai));
     }
@@ -29,6 +33,10 @@ public:
         return true;
     }
 
+    bool kapasitasPenuh() const {
+        return static_cast<int>(DaftarKendaraan.size()) >= Kapasitas;
+    }
+
     // Seluruh pegawai menangani kendaraan (dispatch polimorfik)
     void prosesKendaraan(std::size_t indeksKendaraan) {
         if (indeksKendaraan >= DaftarKendaraan.size()) return;
@@ -38,6 +46,10 @@ public:
 
     const std::vector<std::unique_ptr<PegawaiBengkel>>& getDaftarPegawai() const {
         return DaftarPegawai;
+    }
+
+    const std::vector<Kendaraan>& getDaftarKendaraan() const {
+        return DaftarKendaraan;
     }
 
     void cetakRingkasan() const {

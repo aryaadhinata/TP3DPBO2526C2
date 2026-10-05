@@ -29,6 +29,13 @@ public:
             FokusPemeriksaan(std::move(fokus)) {}
 
     void periksaKendaraan(const Kendaraan& kendaraan) {
+        if (kendaraan.getJenis() != getSpesialisasi()) {
+            std::cout << "  [Mekanik " << getNama() << "] Menolak: kendaraan "
+                        << toString(kendaraan.getJenis()) << " bukan spesialisasinya ("
+                        << toString(getSpesialisasi()) << ").\n";
+            return;
+        }
+
         std::cout << "  [Mekanik " << getNama() << "] Memeriksa "
                     << kendaraan.getDetailKendaraan() << "\n";
         for (const auto& masalah : kendaraan.getDaftarMasalah()) {

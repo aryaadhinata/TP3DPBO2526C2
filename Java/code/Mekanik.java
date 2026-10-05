@@ -24,7 +24,7 @@ public class Mekanik extends PegawaiBengkel {
      * @param fokus bagian yang diperiksa; daftar kosong berarti semua bagian
      */
     public Mekanik(String id, String nama, int performa,
-                   JenisKendaraan spesialisasi, List<FokusBagian> fokus) {
+                    JenisKendaraan spesialisasi, List<FokusBagian> fokus) {
         super(id, nama, performa, spesialisasi);
         this.FokusPemeriksaan = new ArrayList<>(fokus);
     }

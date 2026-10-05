@@ -20,7 +20,7 @@ public class Montir extends PegawaiBengkel {
      * @param keahlian ringkasan keahlian teknis
      */
     public Montir(String id, String nama, int performa,
-                  JenisKendaraan spesialisasi, String keahlian) {
+                    JenisKendaraan spesialisasi, String keahlian) {
         super(id, nama, performa, spesialisasi);
         this.Keahlian = keahlian;
     }

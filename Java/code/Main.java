@@ -209,7 +209,7 @@ public class Main {
      * @return false jika input berakhir sebelum bengkel selesai dibuat
      */
     private static boolean tambahBengkel(List<Bengkel> bengkelList,
-                                         int[] bengkelAktif) {
+                                        int[] bengkelAktif) {
         String nama = bacaTeks("Nama bengkel: ");
         Integer kapasitas = bacaAngka("Kapasitas kendaraan: ", 1, 1_000_000);
         if (nama == null || kapasitas == null) {

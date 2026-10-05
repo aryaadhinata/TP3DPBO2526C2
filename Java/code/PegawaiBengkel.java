@@ -20,7 +20,7 @@ public abstract class PegawaiBengkel {
      * @param spesialisasi kategori kendaraan yang dapat ditangani
      */
     protected PegawaiBengkel(String id, String nama, int performa,
-                             JenisKendaraan spesialisasi) {
+                            JenisKendaraan spesialisasi) {
         this.IdPegawai = id;
         this.Nama = nama;
         this.Performa = performa;

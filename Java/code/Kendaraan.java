@@ -24,7 +24,7 @@ public class Kendaraan {
      * @param asal negara asal produsen
      */
     public Kendaraan(String brand, String tipe, JenisKendaraan jenis,
-                     int tahun, String asal) {
+                    int tahun, String asal) {
         this.Brand = brand;
         this.Tipe = tipe;
         this.Jenis = jenis;

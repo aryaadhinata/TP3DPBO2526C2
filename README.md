@@ -6,12 +6,11 @@ class yang mengikuti ERD.
 
 ## Janji
 
-|  |
-|:--|
-|  |
-|  |
-|  |
-|  |
+```
+Saya Mohammad Arya Dhinata dengan NIM 2504992 mengerjakan Tugas Praktikum 3 dalam mata kuliah Desain
+Pemrograman Berbasis Objek untuk keberkahan-Nya maka saya tidak melakukan kecurangan seperti
+yang di spesifikasikan. Aamiin
+```
 
 ## Desain diagram program
 
@@ -321,17 +320,6 @@ java -cp .\out\java Main
 
 Screenshot yang sudah tersedia di repository ditampilkan per bahasa.
 
-### C++
-
-| Fitur | Screenshot |
-|---|---|
-| Menu dan ringkasan | ![Menu C++](./CPP/documentation/menu.png) ![Ringkasan C++](./CPP/documentation/ringkasan.png) |
-| Tambah pegawai | ![Tambah Montir C++](./CPP/documentation/tambahPegaawaiMontir.png) ![Tambah Mekanik C++](./CPP/documentation/tambahPegawaiMekanik1.png) |
-| Tambah kendaraan dan proses | ![Tambah kendaraan C++](./CPP/documentation/tambahKendaraan1.png) ![Proses kendaraan C++](./CPP/documentation/prosesKendaraan.png) |
-| Laporan dan bengkel | ![Laporan Montir C++](./CPP/documentation/LaporanMontir.png) ![Tambah bengkel C++](./CPP/documentation/TambahBengkel.png) ![Ganti bengkel C++](./CPP/documentation/gantiBengkel.png) |
-
-### Python
-
 | Fitur | Screenshot |
 |---|---|
 | Menu dan ringkasan | ![Menu Python](./Python/documentation/menu.png) ![Ringkasan Python](./Python/documentation/ringkasan.png) |
@@ -339,11 +327,3 @@ Screenshot yang sudah tersedia di repository ditampilkan per bahasa.
 | Tambah kendaraan dan proses | ![Tambah kendaraan Python](./Python/documentation/tambahKendaraan.png) ![Proses kendaraan Python](./Python/documentation/prosesKendaraan.png) |
 | Laporan dan bengkel | ![Laporan Montir Python](./Python/documentation/laporanMontir.png) ![Tambah bengkel Python](./Python/documentation/tambahBengkel.png) ![Ganti bengkel Python](./Python/documentation/gantiBengkel.png) |
 
-### Java
-
-| Fitur | Screenshot |
-|---|---|
-| Menu dan ringkasan | ![Menu Java](./Java/documentation/menu.png) ![Ringkasan Java](./Java/documentation/ringkasan.png) |
-| Tambah pegawai | ![Tambah pegawai Java](./Java/documentation/tambahPegawai.png) |
-| Tambah kendaraan dan proses | ![Tambah kendaraan Java](./Java/documentation/tambahKendaraan.png) ![Proses kendaraan Java](./Java/documentation/prosesKendaraan.png) |
-| Laporan dan bengkel | ![Laporan Montir Java](./Java/documentation/laporanMontir.png) ![Tambah bengkel Java](./Java/documentation/tambahBengkel.png) ![Ganti bengkel Java](./Java/documentation/gantiBengekel.png) |

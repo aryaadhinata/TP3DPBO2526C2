@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/** Menyimpan identitas kendaraan beserta masalah yang melekat padanya. */
 public class Kendaraan {
     private final String Brand;
     private final String Tipe;

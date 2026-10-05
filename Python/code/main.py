@@ -1,3 +1,5 @@
+"""Antarmuka CLI untuk mengelola bengkel dan menjalankan layanan kendaraan."""
+
 if __package__:
     from .Bengkel import Bengkel
     from .Kendaraan import Kendaraan

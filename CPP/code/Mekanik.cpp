@@ -9,6 +9,7 @@
 #include "MasalahKendaraan.cpp"
 #include "PegawaiBengkel.cpp"
 
+// Pegawai pemeriksa yang mencatat masalah sesuai spesialisasi dan fokusnya.
 class Mekanik : public PegawaiBengkel {
 private:
     std::vector<MasalahKendaraan> DaftarPemeriksaan;

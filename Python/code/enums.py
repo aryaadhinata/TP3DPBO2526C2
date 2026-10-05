@@ -1,3 +1,5 @@
+"""Enumerasi domain untuk klasifikasi kendaraan dan bagian kendaraan."""
+
 from enum import Enum
 
 

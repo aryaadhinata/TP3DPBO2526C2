@@ -1,3 +1,4 @@
+/** Bagian kendaraan yang dapat menjadi fokus pemeriksaan atau sumber masalah. */
 public enum FokusBagian {
     MESIN,
     TRANSMISI,

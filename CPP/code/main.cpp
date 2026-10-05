@@ -9,6 +9,7 @@
 
 using namespace std;
 
+// Menyediakan CLI untuk mengelola bengkel, pegawai, kendaraan, dan layanan.
 static const vector<FokusBagian>& daftarFokus() {
     static const vector<FokusBagian> fokus = {
         FokusBagian::MESIN, FokusBagian::TRANSMISI, FokusBagian::REM,

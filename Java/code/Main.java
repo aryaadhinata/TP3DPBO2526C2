@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/** Menjalankan menu CLI untuk pengelolaan satu atau beberapa bengkel. */
 public class Main {
     private static final Scanner INPUT = new Scanner(System.in);
 

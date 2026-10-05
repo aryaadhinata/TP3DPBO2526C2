@@ -3,6 +3,7 @@
 #include <string>
 #include <utility>
 
+// Menyimpan kondisi perbaikan, lokasi masalah, dan estimasi waktu layanan.
 class MasalahKendaraan {
 private:
     std::string NamaMasalah;

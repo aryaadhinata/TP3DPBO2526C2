@@ -3,6 +3,8 @@ from .MasalahKendaraan import MasalahKendaraan
 
 
 class Kendaraan:
+    """Menyimpan identitas kendaraan dan komposisi masalah yang dimilikinya."""
+
     def __init__(
         self,
         brand: str,

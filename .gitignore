@@ -1,0 +1,28 @@
+# Java compiler output
+*.class
+
+# Python bytecode and interpreter caches
+__pycache__/
+*.py[cod]
+
+# C/C++ build artifacts
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Common build output directories
+build/
+out/
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+
+# IDE and editor metadata
+.idea/
+.vscode/
+.vs/

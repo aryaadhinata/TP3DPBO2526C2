@@ -6,6 +6,7 @@
 #include "Enums.cpp"
 #include "MasalahKendaraan.cpp"
 
+// Merepresentasikan kendaraan dan menyimpan masalah yang menjadi bagiannya.
 class Kendaraan {
 private:
     std::string Brand;

@@ -1,3 +1,5 @@
+"""Ekspor class dan enumerasi domain bengkel sebagai API package."""
+
 from .Bengkel import Bengkel
 from .Kendaraan import Kendaraan
 from .Mekanik import Mekanik

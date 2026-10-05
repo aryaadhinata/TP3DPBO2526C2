@@ -3,6 +3,8 @@ from .PegawaiBengkel import PegawaiBengkel
 
 
 class Bengkel:
+    """Mengelola pegawai, kendaraan, kapasitas, dan proses layanan bengkel."""
+
     def __init__(self, nama: str, kapasitas: int) -> None:
         self.NamaBengkel = nama
         self.DaftarPegawai: list[PegawaiBengkel] = []

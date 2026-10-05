@@ -4,6 +4,8 @@ from .enums import FokusBagian
 
 
 class MasalahKendaraan:
+    """Mencatat masalah kendaraan, estimasi layanan, dan status perbaikannya."""
+
     def __init__(self, nama: str, bagian: str | FokusBagian) -> None:
         self.NamaMasalah = nama
         self.BagianBermasalah = (

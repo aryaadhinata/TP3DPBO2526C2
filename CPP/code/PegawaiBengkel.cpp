@@ -5,6 +5,7 @@
 #include "Enums.cpp"
 #include "Kendaraan.cpp"
 
+// Kelas dasar abstrak untuk pegawai dengan spesialisasi kendaraan tertentu.
 class PegawaiBengkel {
 private:
     std::string IdPegawai;

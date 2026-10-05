@@ -5,6 +5,8 @@ from .Kendaraan import Kendaraan
 
 
 class PegawaiBengkel(ABC):
+    """Kelas dasar abstrak bagi pegawai bengkel yang menangani kendaraan."""
+
     def __init__(
         self, id_pegawai: str, nama: str, performa: int, spesialisasi: JenisKendaraan
     ) -> None:

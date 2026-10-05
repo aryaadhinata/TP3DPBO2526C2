@@ -7,6 +7,7 @@
 #include "Kendaraan.cpp"
 #include "PegawaiBengkel.cpp"
 
+// Mengelola pegawai, kendaraan, kapasitas, dan proses layanan sebuah bengkel.
 class Bengkel {
 private:
     std::string NamaBengkel;

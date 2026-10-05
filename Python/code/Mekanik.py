@@ -7,6 +7,8 @@ from .PegawaiBengkel import PegawaiBengkel
 
 
 class Mekanik(PegawaiBengkel):
+    """Pegawai pemeriksa yang menyaring dan mengurutkan temuan inspeksi."""
+
     def __init__(
         self,
         id_pegawai: str,

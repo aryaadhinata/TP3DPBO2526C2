@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/** Mengelola pegawai, kendaraan, kapasitas, dan proses layanan bengkel. */
 public class Bengkel {
     private final String NamaBengkel;
     private final List<PegawaiBengkel> DaftarPegawai = new ArrayList<>();

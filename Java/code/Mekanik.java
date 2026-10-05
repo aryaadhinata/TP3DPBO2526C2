@@ -3,6 +3,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/** Pegawai pemeriksa yang mencatat masalah sesuai fokus dan spesialisasinya. */
 public class Mekanik extends PegawaiBengkel {
     private final List<MasalahKendaraan> DaftarPemeriksaan = new ArrayList<>();
     private final List<FokusBagian> FokusPemeriksaan;

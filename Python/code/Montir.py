@@ -5,6 +5,8 @@ from .PegawaiBengkel import PegawaiBengkel
 
 
 class Montir(PegawaiBengkel):
+    """Pegawai teknisi yang memperbaiki kendaraan dan mencatat laporannya."""
+
     def __init__(
         self,
         id_pegawai: str,

@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/** Pegawai teknisi yang memperbaiki kendaraan dan menyusun laporan perawatan. */
 public class Montir extends PegawaiBengkel {
     private final String Keahlian;
     private final List<MasalahKendaraan> LaporanPerawatan = new ArrayList<>();

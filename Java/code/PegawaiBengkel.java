@@ -1,3 +1,4 @@
+/** Kelas dasar abstrak untuk pegawai dan dispatch penanganan kendaraan. */
 public abstract class PegawaiBengkel {
     private final String IdPegawai;
     private final String Nama;

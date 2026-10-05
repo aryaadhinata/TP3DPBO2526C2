@@ -8,6 +8,7 @@
 #include "MasalahKendaraan.cpp"
 #include "PegawaiBengkel.cpp"
 
+// Pegawai teknisi yang memperbaiki kendaraan dan menyusun laporan perawatan.
 class Montir : public PegawaiBengkel {
 private:
     std::string Keahlian;

@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
 
+// Nilai enumerasi bersama untuk jenis kendaraan dan fokus pemeriksaan.
 enum class JenisKendaraan { MOBIL, MOTOR };
 
 enum class FokusBagian {

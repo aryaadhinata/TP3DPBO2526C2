@@ -2,6 +2,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
+/** Mencatat bagian bermasalah, estimasi perbaikan, dan status terakhirnya. */
 public class MasalahKendaraan {
     private static final DateTimeFormatter FORMAT_WAKTU =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
